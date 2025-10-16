@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Aviz Academy</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+      --surface-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+      --brand-primary: #FF6B35;
+      --brand-accent: #FFD23F;
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --transition-normal: 300ms ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--dark-gradient);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: 0 var(--space-lg);
+    }
+
+    .logo-container img {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .brand-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .brand-text span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2xl);
+    }
+
+    .login-container {
+      background: var(--surface-gradient);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-2xl);
+      width: 100%;
+      max-width: 450px;
+      box-shadow: var(--shadow-2xl);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-md);
+      color: var(--brand-accent);
+      text-decoration: none;
+      font-weight: 500;
+      margin-bottom: var(--space-xl);
+      transition: var(--transition-normal);
+      align-self: flex-start;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+
+    h1 {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: var(--space-md);
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.125rem;
+      font-weight: 400;
+      margin-bottom: var(--space-2xl);
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: var(--space-xl);
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: var(--space-md);
+      font-weight: 600;
+      color: var(--brand-accent);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: var(--space-lg);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+      font-size: 1rem;
+      transition: var(--transition-normal);
+      backdrop-filter: blur(10px);
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: var(--space-lg);
+      background: var(--primary-gradient);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-xl);
+      cursor: pointer;
+      transition: var(--transition-normal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s ease-in-out;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-2xl);
+    }
+
+    .footer-text {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.875rem;
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        padding: var(--space-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="logo.png" alt="Aviz Academy Logo" />
+      </div>
+      <a href="index.html" class="brand-text">AWS and DevOps with<span> Aviz Academy</span></a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="login-container">
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </a>
+      
+      <h1>Welcome Back</h1>
+      <h2>Enter your registered name to access your learning dashboard and continue your AWS & DevOps journey</h2>
+
+      <form action="submit2.php" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="Name" placeholder="Enter your registered name" required>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Access Dashboard
+        </button>
+      </form>
+
+      <div class="footer-text">
+        Don't have an account? <a href="newuser.html" style="color: var(--brand-accent);">Sign up here</a>
+        <br><br>
+        Powered by <strong>Aviz Academy</strong> — Led by Avinash Reddy Thipparthi
+      </div>
+    </div>
+  </div>
+</body>
+</html>

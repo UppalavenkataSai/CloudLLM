@@ -1,0 +1,52 @@
+Step 1 : Create a VPC with 6 Subnets and NAT gateway.
+Step 2 : Create a DB SubnetGroup with DB Subnets, and launch mysql DB.
+Step 3 : Create an EFS, make sure to create it in APP-Subnet.
+Step 4 : Launch an EC2 Instance in CustomVPC APP SUbnet, Connect using Jump Server.
+Step 5 : Install httpd.. Now, mount EFS to /var/www/html/ path, Make it perm mount.
+Step 6 : Install PHP and test the php configuration (we have 2 options.. Test from Jump server (or) test via Load Balancer).
+Step 7 : Create a Load balancer in WEB Subnets, Add APP Server to Load balancer TG, and Test the output. (lb-dns/info.php)
+Step 8 : Install mysql client tool, connect to the Mysql database and prepare the required schema and table to store customer information when they enter during sign-up.
+Step 9 : Update the "submit.php", "submit2.php" files with our DB information.
+Step 10 : Create an S3 Bucket, Upload 2 sample videos and create a cloudfront distribution for the bucket and test the video access.
+Step 11 : Make sure to configure redirection rule (http to https redirection)
+Step 12 : Create an SSL/TLS Certificate for your domain name, add it on your load balancer on port 443/https.
+Step 13 : Create an IAM role, add SSMFullAccess to the role and attach to the ec2 instance. Add a specific tag to the ec2 instance for cicd purpose.
+Step 14 : In Route53, Map your domain with Load balancer DNS name and verify the output. (restart instance and test it)
+Step 15 : Create a repository in your git hub, Clone it to local and copy all the code your prepared above, place it into the local repo and push it to the github central repo.
+
+Step 16 : Create an app in CodeCommit Settings to fetch repo from the github. (username and password)
+Step 17 : Create a Pipeline, Choose Github as source and pick the repository and branch.. Skip build & Test.. Configure Deploy option
+Deploy to EC2, SSM managed Instance, Enter the tags you associated to your ec2 instance (i.e; PROJECT:CICD) Enter path as "/var/www/html/" and post script as "final.sh"
+
+Step 18 : Do some changes in your local laptop and push the code to Github repository.. and poipeline should start automatically, and new changes should deliver via load balancer.
+
+Step 19 : Stop your ec2 instance, create a goldenAMI, Configure a Launch Template with the new AMI (add role)
+Step 20 : Configure the AutoScaling Group, use Existing LoadBalancer's target group. (make sure to add the role and Tags)
+
+Step 21 : Now, Do the modifications on your code and push to git, now Codepipeline should detect your changes, runs pipeline, deploy the latest code to multiple ec2 instances.
+
+
+
+
+
+SG : 
+
+RDS : 3306 --> SG-Web and Sg-Jump
+Jump : 22 --> Only My Network / Any where
+Web : 22 --> Sg-Jump.. 80 --> SG-LB
+EFS : 2049 --> SG-Web
+LB : 80, 443 --> 0.0.0.0/0
+
+
+
+dnf install httpd -y
+dnf install mariadb105 -y
+
+dnf install -y php-cli php-common php-pdo php-mbstring php-xml
+
+
+
+
+
+
+
